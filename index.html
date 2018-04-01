@@ -1,0 +1,1464 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/Localidades_Electoral_2018_0.js"></script>
+        <script src="data/CIS_Petro_Loc_1.js"></script>
+        <script src="data/GCC_Duque_Loc_2.js"></script>
+        <script src="data/Cam_2018_CDemocratico_3.js"></script>
+        <script src="data/Cam_2018_Decentes_4.js"></script>
+        <script src="data/Cam_2018_Polo_5.js"></script>
+        <script src="data/Cam_2018_Verde_6.js"></script>
+        <script src="data/Sen_2018_CDemocratico_7.js"></script>
+        <script src="data/Sen_2018_Decentes_8.js"></script>
+        <script src="data/Sen_2018_Polo_9.js"></script>
+        <script src="data/Sen_2018_Verde_10.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[4.4317789963,-74.5112661581],[4.8696919963,-73.6853776054]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 28
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+        }
+        function pop_Localidades_Electoral_2018_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">LocNombre</th>\
+                        <td>' + (feature.properties['LocNombre'] !== null ? Autolinker.link(String(feature.properties['LocNombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LocCodigo</th>\
+                        <td>' + (feature.properties['LocCodigo'] !== null ? Autolinker.link(String(feature.properties['LocCodigo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">01_SEN_LIB</th>\
+                        <td>' + (feature.properties['01_SEN_LIB'] !== null ? Autolinker.link(String(feature.properties['01_SEN_LIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">02_SEN_CON</th>\
+                        <td>' + (feature.properties['02_SEN_CON'] !== null ? Autolinker.link(String(feature.properties['02_SEN_CON'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">04_SEN_CR</th>\
+                        <td>' + (feature.properties['04_SEN_CR'] !== null ? Autolinker.link(String(feature.properties['04_SEN_CR'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">05_SEN_VER</th>\
+                        <td>' + (feature.properties['05_SEN_VER'] !== null ? Autolinker.link(String(feature.properties['05_SEN_VER'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">09_SEN_U</th>\
+                        <td>' + (feature.properties['09_SEN_U'] !== null ? Autolinker.link(String(feature.properties['09_SEN_U'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">10_SEN_POL</th>\
+                        <td>' + (feature.properties['10_SEN_POL'] !== null ? Autolinker.link(String(feature.properties['10_SEN_POL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">12_SEN_CD</th>\
+                        <td>' + (feature.properties['12_SEN_CD'] !== null ? Autolinker.link(String(feature.properties['12_SEN_CD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">79_SEN_DEC</th>\
+                        <td>' + (feature.properties['79_SEN_DEC'] !== null ? Autolinker.link(String(feature.properties['79_SEN_DEC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">01_CAM_LIB</th>\
+                        <td>' + (feature.properties['01_CAM_LIB'] !== null ? Autolinker.link(String(feature.properties['01_CAM_LIB'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">02_CAM_CON</th>\
+                        <td>' + (feature.properties['02_CAM_CON'] !== null ? Autolinker.link(String(feature.properties['02_CAM_CON'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">04_CAM_CR</th>\
+                        <td>' + (feature.properties['04_CAM_CR'] !== null ? Autolinker.link(String(feature.properties['04_CAM_CR'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">05_CAM_VER</th>\
+                        <td>' + (feature.properties['05_CAM_VER'] !== null ? Autolinker.link(String(feature.properties['05_CAM_VER'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">09_CAM_U</th>\
+                        <td>' + (feature.properties['09_CAM_U'] !== null ? Autolinker.link(String(feature.properties['09_CAM_U'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">10_CAM_POL</th>\
+                        <td>' + (feature.properties['10_CAM_POL'] !== null ? Autolinker.link(String(feature.properties['10_CAM_POL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">12_CAM_CD</th>\
+                        <td>' + (feature.properties['12_CAM_CD'] !== null ? Autolinker.link(String(feature.properties['12_CAM_CD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">79_CAM_DEC</th>\
+                        <td>' + (feature.properties['79_CAM_DEC'] !== null ? Autolinker.link(String(feature.properties['79_CAM_DEC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GCC_IVAN</th>\
+                        <td>' + (feature.properties['GCC_IVAN'] !== null ? Autolinker.link(String(feature.properties['GCC_IVAN'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CIS_PETRO</th>\
+                        <td>' + (feature.properties['CIS_PETRO'] !== null ? Autolinker.link(String(feature.properties['CIS_PETRO'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Localidades_Electoral_2018_0_0() {
+            return {
+                pane: 'pane_Localidades_Electoral_2018_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Localidades_Electoral_2018_0');
+        map.getPane('pane_Localidades_Electoral_2018_0').style.zIndex = 400;
+        map.getPane('pane_Localidades_Electoral_2018_0').style['mix-blend-mode'] = 'normal';
+        var layer_Localidades_Electoral_2018_0 = new L.geoJson(json_Localidades_Electoral_2018_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Localidades_Electoral_2018_0',
+            onEachFeature: pop_Localidades_Electoral_2018_0,
+            style: style_Localidades_Electoral_2018_0_0,
+        });
+        bounds_group.addLayer(layer_Localidades_Electoral_2018_0);
+        map.addLayer(layer_Localidades_Electoral_2018_0);
+        function pop_CIS_Petro_Loc_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CIS_PETRO</th>\
+                        <td>' + (feature.properties['CIS_PETRO'] !== null ? Autolinker.link(String(feature.properties['CIS_PETRO'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CIS_Petro_Loc_1_0(feature) {
+            if (feature.properties['CIS_PETRO'] >= 11.000000 && feature.properties['CIS_PETRO'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_CIS_Petro_Loc_1',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+            }
+            }
+            if (feature.properties['CIS_PETRO'] >= 1000.000000 && feature.properties['CIS_PETRO'] <= 2000.000000 ) {
+                return {
+                pane: 'pane_CIS_Petro_Loc_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,145,0,1.0)',
+            }
+            }
+            if (feature.properties['CIS_PETRO'] >= 2000.000000 && feature.properties['CIS_PETRO'] <= 3000.000000 ) {
+                return {
+                pane: 'pane_CIS_Petro_Loc_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,255,0,1.0)',
+            }
+            }
+            if (feature.properties['CIS_PETRO'] >= 3000.000000 && feature.properties['CIS_PETRO'] <= 4000.000000 ) {
+                return {
+                pane: 'pane_CIS_Petro_Loc_1',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(129,255,0,1.0)',
+            }
+            }
+            if (feature.properties['CIS_PETRO'] >= 4000.000000 && feature.properties['CIS_PETRO'] <= 4599.000000 ) {
+                return {
+                pane: 'pane_CIS_Petro_Loc_1',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_CIS_Petro_Loc_1');
+        map.getPane('pane_CIS_Petro_Loc_1').style.zIndex = 401;
+        map.getPane('pane_CIS_Petro_Loc_1').style['mix-blend-mode'] = 'normal';
+        var layer_CIS_Petro_Loc_1 = new L.geoJson(json_CIS_Petro_Loc_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_CIS_Petro_Loc_1',
+            onEachFeature: pop_CIS_Petro_Loc_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_CIS_Petro_Loc_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_CIS_Petro_Loc_1);
+        map.addLayer(layer_CIS_Petro_Loc_1);
+        function pop_GCC_Duque_Loc_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GCC_IVAN</th>\
+                        <td>' + (feature.properties['GCC_IVAN'] !== null ? Autolinker.link(String(feature.properties['GCC_IVAN'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_GCC_Duque_Loc_2_0(feature) {
+            if (feature.properties['GCC_IVAN'] >= 0.000000 && feature.properties['GCC_IVAN'] <= 2753.400000 ) {
+                return {
+                pane: 'pane_GCC_Duque_Loc_2',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+            }
+            }
+            if (feature.properties['GCC_IVAN'] >= 2753.400000 && feature.properties['GCC_IVAN'] <= 5506.800000 ) {
+                return {
+                pane: 'pane_GCC_Duque_Loc_2',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,145,0,1.0)',
+            }
+            }
+            if (feature.properties['GCC_IVAN'] >= 5506.800000 && feature.properties['GCC_IVAN'] <= 8260.200000 ) {
+                return {
+                pane: 'pane_GCC_Duque_Loc_2',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,255,0,1.0)',
+            }
+            }
+            if (feature.properties['GCC_IVAN'] >= 8260.200000 && feature.properties['GCC_IVAN'] <= 11013.600000 ) {
+                return {
+                pane: 'pane_GCC_Duque_Loc_2',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(129,255,0,1.0)',
+            }
+            }
+            if (feature.properties['GCC_IVAN'] >= 11013.600000 && feature.properties['GCC_IVAN'] <= 13767.000000 ) {
+                return {
+                pane: 'pane_GCC_Duque_Loc_2',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_GCC_Duque_Loc_2');
+        map.getPane('pane_GCC_Duque_Loc_2').style.zIndex = 402;
+        map.getPane('pane_GCC_Duque_Loc_2').style['mix-blend-mode'] = 'normal';
+        var layer_GCC_Duque_Loc_2 = new L.geoJson(json_GCC_Duque_Loc_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_GCC_Duque_Loc_2',
+            onEachFeature: pop_GCC_Duque_Loc_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_GCC_Duque_Loc_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_GCC_Duque_Loc_2);
+        map.addLayer(layer_GCC_Duque_Loc_2);
+        function pop_Cam_2018_CDemocratico_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">12_CD</th>\
+                        <td>' + (feature.properties['12_CD'] !== null ? Autolinker.link(String(feature.properties['12_CD'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Cam_2018_CDemocratico_3_0(feature) {
+            if (feature.properties['12_CD'] >= 1.000000 && feature.properties['12_CD'] <= 2000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_CDemocratico_3',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 2000.000000 && feature.properties['12_CD'] <= 4000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_CDemocratico_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,121,5,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 4000.000000 && feature.properties['12_CD'] <= 6000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_CDemocratico_3',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,211,0,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 6000.000000 && feature.properties['12_CD'] <= 8000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_CDemocratico_3',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,255,0,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 8000.000000 && feature.properties['12_CD'] <= 10000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_CDemocratico_3',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,239,0,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 10000.000000 && feature.properties['12_CD'] <= 11357.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_CDemocratico_3',
+                radius: 12.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_Cam_2018_CDemocratico_3');
+        map.getPane('pane_Cam_2018_CDemocratico_3').style.zIndex = 403;
+        map.getPane('pane_Cam_2018_CDemocratico_3').style['mix-blend-mode'] = 'normal';
+        var layer_Cam_2018_CDemocratico_3 = new L.geoJson(json_Cam_2018_CDemocratico_3, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Cam_2018_CDemocratico_3',
+            onEachFeature: pop_Cam_2018_CDemocratico_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Cam_2018_CDemocratico_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Cam_2018_CDemocratico_3);
+        map.addLayer(layer_Cam_2018_CDemocratico_3);
+        function pop_Cam_2018_Decentes_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">079_DECENC</th>\
+                        <td>' + (feature.properties['079_DECENC'] !== null ? Autolinker.link(String(feature.properties['079_DECENC'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Cam_2018_Decentes_4_0(feature) {
+            if (feature.properties['079_DECENC'] >= 4.000000 && feature.properties['079_DECENC'] <= 327.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Decentes_4',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+            }
+            }
+            if (feature.properties['079_DECENC'] >= 327.000000 && feature.properties['079_DECENC'] <= 650.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Decentes_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,145,0,1.0)',
+            }
+            }
+            if (feature.properties['079_DECENC'] >= 650.000000 && feature.properties['079_DECENC'] <= 973.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Decentes_4',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,255,0,1.0)',
+            }
+            }
+            if (feature.properties['079_DECENC'] >= 973.000000 && feature.properties['079_DECENC'] <= 1296.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Decentes_4',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(129,255,0,1.0)',
+            }
+            }
+            if (feature.properties['079_DECENC'] >= 1296.000000 && feature.properties['079_DECENC'] <= 1619.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Decentes_4',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_Cam_2018_Decentes_4');
+        map.getPane('pane_Cam_2018_Decentes_4').style.zIndex = 404;
+        map.getPane('pane_Cam_2018_Decentes_4').style['mix-blend-mode'] = 'normal';
+        var layer_Cam_2018_Decentes_4 = new L.geoJson(json_Cam_2018_Decentes_4, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Cam_2018_Decentes_4',
+            onEachFeature: pop_Cam_2018_Decentes_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Cam_2018_Decentes_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Cam_2018_Decentes_4);
+        map.addLayer(layer_Cam_2018_Decentes_4);
+        function pop_Cam_2018_Polo_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">10_POLO</th>\
+                        <td>' + (feature.properties['10_POLO'] !== null ? Autolinker.link(String(feature.properties['10_POLO'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Cam_2018_Polo_5_0(feature) {
+            if (feature.properties['10_POLO'] >= 0.000000 && feature.properties['10_POLO'] <= 200.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Polo_5',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+            }
+            }
+            if (feature.properties['10_POLO'] >= 200.000000 && feature.properties['10_POLO'] <= 400.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Polo_5',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,121,5,1.0)',
+            }
+            }
+            if (feature.properties['10_POLO'] >= 400.000000 && feature.properties['10_POLO'] <= 600.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Polo_5',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,211,0,1.0)',
+            }
+            }
+            if (feature.properties['10_POLO'] >= 600.000000 && feature.properties['10_POLO'] <= 800.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Polo_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,255,0,1.0)',
+            }
+            }
+            if (feature.properties['10_POLO'] >= 800.000000 && feature.properties['10_POLO'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Polo_5',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,239,0,1.0)',
+            }
+            }
+            if (feature.properties['10_POLO'] >= 1000.000000 && feature.properties['10_POLO'] <= 1096.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Polo_5',
+                radius: 12.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_Cam_2018_Polo_5');
+        map.getPane('pane_Cam_2018_Polo_5').style.zIndex = 405;
+        map.getPane('pane_Cam_2018_Polo_5').style['mix-blend-mode'] = 'normal';
+        var layer_Cam_2018_Polo_5 = new L.geoJson(json_Cam_2018_Polo_5, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Cam_2018_Polo_5',
+            onEachFeature: pop_Cam_2018_Polo_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Cam_2018_Polo_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Cam_2018_Polo_5);
+        map.addLayer(layer_Cam_2018_Polo_5);
+        function pop_Cam_2018_Verde_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">05_VERDE</th>\
+                        <td>' + (feature.properties['05_VERDE'] !== null ? Autolinker.link(String(feature.properties['05_VERDE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Cam_2018_Verde_6_0(feature) {
+            if (feature.properties['05_VERDE'] >= 0.000000 && feature.properties['05_VERDE'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Verde_6',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 1000.000000 && feature.properties['05_VERDE'] <= 2000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Verde_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,121,5,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 2000.000000 && feature.properties['05_VERDE'] <= 3000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Verde_6',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,211,0,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 3000.000000 && feature.properties['05_VERDE'] <= 4000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Verde_6',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,255,0,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 4000.000000 && feature.properties['05_VERDE'] <= 5000.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Verde_6',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,239,0,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 5000.000000 && feature.properties['05_VERDE'] <= 5480.000000 ) {
+                return {
+                pane: 'pane_Cam_2018_Verde_6',
+                radius: 12.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_Cam_2018_Verde_6');
+        map.getPane('pane_Cam_2018_Verde_6').style.zIndex = 406;
+        map.getPane('pane_Cam_2018_Verde_6').style['mix-blend-mode'] = 'normal';
+        var layer_Cam_2018_Verde_6 = new L.geoJson(json_Cam_2018_Verde_6, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Cam_2018_Verde_6',
+            onEachFeature: pop_Cam_2018_Verde_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Cam_2018_Verde_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Cam_2018_Verde_6);
+        map.addLayer(layer_Cam_2018_Verde_6);
+        function pop_Sen_2018_CDemocratico_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">12_CD</th>\
+                        <td>' + (feature.properties['12_CD'] !== null ? Autolinker.link(String(feature.properties['12_CD'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sen_2018_CDemocratico_7_0(feature) {
+            if (feature.properties['12_CD'] >= 1.000000 && feature.properties['12_CD'] <= 2000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_CDemocratico_7',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 2000.000000 && feature.properties['12_CD'] <= 4000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_CDemocratico_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,121,5,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 4000.000000 && feature.properties['12_CD'] <= 6000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_CDemocratico_7',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,211,0,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 6000.000000 && feature.properties['12_CD'] <= 8000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_CDemocratico_7',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,255,0,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 8000.000000 && feature.properties['12_CD'] <= 10000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_CDemocratico_7',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,239,0,1.0)',
+            }
+            }
+            if (feature.properties['12_CD'] >= 10000.000000 && feature.properties['12_CD'] <= 11314.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_CDemocratico_7',
+                radius: 12.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_Sen_2018_CDemocratico_7');
+        map.getPane('pane_Sen_2018_CDemocratico_7').style.zIndex = 407;
+        map.getPane('pane_Sen_2018_CDemocratico_7').style['mix-blend-mode'] = 'normal';
+        var layer_Sen_2018_CDemocratico_7 = new L.geoJson(json_Sen_2018_CDemocratico_7, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sen_2018_CDemocratico_7',
+            onEachFeature: pop_Sen_2018_CDemocratico_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Sen_2018_CDemocratico_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Sen_2018_CDemocratico_7);
+        map.addLayer(layer_Sen_2018_CDemocratico_7);
+        function pop_Sen_2018_Decentes_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">079_DECENC</th>\
+                        <td>' + (feature.properties['079_DECENC'] !== null ? Autolinker.link(String(feature.properties['079_DECENC'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sen_2018_Decentes_8_0(feature) {
+            if (feature.properties['079_DECENC'] >= 2.000000 && feature.properties['079_DECENC'] <= 500.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Decentes_8',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+            }
+            }
+            if (feature.properties['079_DECENC'] >= 500.000000 && feature.properties['079_DECENC'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Decentes_8',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,182,0,1.0)',
+            }
+            }
+            if (feature.properties['079_DECENC'] >= 1000.000000 && feature.properties['079_DECENC'] <= 1500.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Decentes_8',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(169,255,0,1.0)',
+            }
+            }
+            if (feature.properties['079_DECENC'] >= 1500.000000 && feature.properties['079_DECENC'] <= 1643.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Decentes_8',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_Sen_2018_Decentes_8');
+        map.getPane('pane_Sen_2018_Decentes_8').style.zIndex = 408;
+        map.getPane('pane_Sen_2018_Decentes_8').style['mix-blend-mode'] = 'normal';
+        var layer_Sen_2018_Decentes_8 = new L.geoJson(json_Sen_2018_Decentes_8, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sen_2018_Decentes_8',
+            onEachFeature: pop_Sen_2018_Decentes_8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Sen_2018_Decentes_8_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Sen_2018_Decentes_8);
+        map.addLayer(layer_Sen_2018_Decentes_8);
+        function pop_Sen_2018_Polo_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">10_POLO</th>\
+                        <td>' + (feature.properties['10_POLO'] !== null ? Autolinker.link(String(feature.properties['10_POLO'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sen_2018_Polo_9_0(feature) {
+            if (feature.properties['10_POLO'] >= 0.000000 && feature.properties['10_POLO'] <= 500.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Polo_9',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+            }
+            }
+            if (feature.properties['10_POLO'] >= 500.000000 && feature.properties['10_POLO'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Polo_9',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,255,0,1.0)',
+            }
+            }
+            if (feature.properties['10_POLO'] >= 1000.000000 && feature.properties['10_POLO'] <= 1424.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Polo_9',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_Sen_2018_Polo_9');
+        map.getPane('pane_Sen_2018_Polo_9').style.zIndex = 409;
+        map.getPane('pane_Sen_2018_Polo_9').style['mix-blend-mode'] = 'normal';
+        var layer_Sen_2018_Polo_9 = new L.geoJson(json_Sen_2018_Polo_9, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sen_2018_Polo_9',
+            onEachFeature: pop_Sen_2018_Polo_9,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Sen_2018_Polo_9_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Sen_2018_Polo_9);
+        map.addLayer(layer_Sen_2018_Polo_9);
+        function pop_Sen_2018_Verde_10(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">ID_2018</th>\
+                        <td>' + (feature.properties['ID_2018'] !== null ? Autolinker.link(String(feature.properties['ID_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? Autolinker.link(String(feature.properties['Localidad'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Puesto</th>\
+                        <td>' + (feature.properties['Puesto'] !== null ? Autolinker.link(String(feature.properties['Puesto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? Autolinker.link(String(feature.properties['Nombre'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Direccion</th>\
+                        <td>' + (feature.properties['Direccion'] !== null ? Autolinker.link(String(feature.properties['Direccion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">05_VERDE</th>\
+                        <td>' + (feature.properties['05_VERDE'] !== null ? Autolinker.link(String(feature.properties['05_VERDE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sen_2018_Verde_10_0(feature) {
+            if (feature.properties['05_VERDE'] >= 2.000000 && feature.properties['05_VERDE'] <= 1000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Verde_10',
+                radius: 2.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 1000.000000 && feature.properties['05_VERDE'] <= 2000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Verde_10',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(241,124,16,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 2000.000000 && feature.properties['05_VERDE'] <= 3000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Verde_10',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,201,12,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 3000.000000 && feature.properties['05_VERDE'] <= 4000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Verde_10',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,18,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 4000.000000 && feature.properties['05_VERDE'] <= 5000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Verde_10',
+                radius: 10.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,241,20,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 5000.000000 && feature.properties['05_VERDE'] <= 6000.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Verde_10',
+                radius: 12.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,196,16,1.0)',
+            }
+            }
+            if (feature.properties['05_VERDE'] >= 6000.000000 && feature.properties['05_VERDE'] <= 6536.000000 ) {
+                return {
+                pane: 'pane_Sen_2018_Verde_10',
+                radius: 14.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(38,121,5,1.0)',
+            }
+            }
+        }
+        map.createPane('pane_Sen_2018_Verde_10');
+        map.getPane('pane_Sen_2018_Verde_10').style.zIndex = 410;
+        map.getPane('pane_Sen_2018_Verde_10').style['mix-blend-mode'] = 'normal';
+        var layer_Sen_2018_Verde_10 = new L.geoJson(json_Sen_2018_Verde_10, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sen_2018_Verde_10',
+            onEachFeature: pop_Sen_2018_Verde_10,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Sen_2018_Verde_10_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Sen_2018_Verde_10);
+        map.addLayer(layer_Sen_2018_Verde_10);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Sen_2018_Verde<br /><table><tr><td style="text-align: center;"><img src="legend/Sen_2018_Verde_10_010000.png" /></td><td> 0 - 1000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Verde_10_100020001.png" /></td><td> 1000 - 2000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Verde_10_200030002.png" /></td><td> 2000 - 3000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Verde_10_300040003.png" /></td><td> 3000 - 4000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Verde_10_400050004.png" /></td><td> 4000 - 5000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Verde_10_500060005.png" /></td><td> 5000 - 6000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Verde_10_600065406.png" /></td><td> 6000 - 6540 </td></tr></table>': layer_Sen_2018_Verde_10,'Sen_2018_Polo<br /><table><tr><td style="text-align: center;"><img src="legend/Sen_2018_Polo_9_05000.png" /></td><td> 0 - 500 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Polo_9_50010001.png" /></td><td> 500 - 1000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Polo_9_100014002.png" /></td><td> 1000 - 1400 </td></tr></table>': layer_Sen_2018_Polo_9,'Sen_2018_Decentes<br /><table><tr><td style="text-align: center;"><img src="legend/Sen_2018_Decentes_8_05000.png" /></td><td> 0 - 500 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Decentes_8_50010001.png" /></td><td> 500 - 1000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Decentes_8_100015002.png" /></td><td> 1000 - 1500 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_Decentes_8_150016003.png" /></td><td> 1500 - 1600 </td></tr></table>': layer_Sen_2018_Decentes_8,'Sen_2018_C. Democratico<br /><table><tr><td style="text-align: center;"><img src="legend/Sen_2018_CDemocratico_7_120000.png" /></td><td> 1 - 2000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_CDemocratico_7_200040001.png" /></td><td> 2000 - 4000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_CDemocratico_7_400060002.png" /></td><td> 4000 - 6000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_CDemocratico_7_600080003.png" /></td><td> 6000 - 8000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_CDemocratico_7_8000100004.png" /></td><td> 8000 - 10000 </td></tr><tr><td style="text-align: center;"><img src="legend/Sen_2018_CDemocratico_7_10000113145.png" /></td><td> 10000 - 11314 </td></tr></table>': layer_Sen_2018_CDemocratico_7,'Cam_2018_Verde<br /><table><tr><td style="text-align: center;"><img src="legend/Cam_2018_Verde_6_010000.png" /></td><td> 0 - 1000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Verde_6_100020001.png" /></td><td> 1000 - 2000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Verde_6_200030002.png" /></td><td> 2000 - 3000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Verde_6_300040003.png" /></td><td> 3000 - 4000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Verde_6_400050004.png" /></td><td> 4000 - 5000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Verde_6_500054805.png" /></td><td> 5000 - 5480 </td></tr></table>': layer_Cam_2018_Verde_6,'Cam_2018_Polo<br /><table><tr><td style="text-align: center;"><img src="legend/Cam_2018_Polo_5_02000.png" /></td><td> 0 - 200 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Polo_5_2004001.png" /></td><td> 200 - 400 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Polo_5_4006002.png" /></td><td> 400 - 600 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Polo_5_6008003.png" /></td><td> 600 - 800 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Polo_5_80010004.png" /></td><td> 800 - 1000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Polo_5_100011005.png" /></td><td> 1000 - 1100 </td></tr></table>': layer_Cam_2018_Polo_5,'Cam_2018_Decentes<br /><table><tr><td style="text-align: center;"><img src="legend/Cam_2018_Decentes_4_03300.png" /></td><td> 0 - 330 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Decentes_4_3306501.png" /></td><td> 330 - 650 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Decentes_4_6509702.png" /></td><td> 650 - 970 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Decentes_4_97013003.png" /></td><td> 970 - 1300 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_Decentes_4_130016204.png" /></td><td> 1300 - 1620 </td></tr></table>': layer_Cam_2018_Decentes_4,'Cam_2018_C. Democratico<br /><table><tr><td style="text-align: center;"><img src="legend/Cam_2018_CDemocratico_3_020000.png" /></td><td> 0 - 2000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_CDemocratico_3_200040001.png" /></td><td> 2000 - 4000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_CDemocratico_3_400060002.png" /></td><td> 4000 - 6000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_CDemocratico_3_600080003.png" /></td><td> 6000 - 8000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_CDemocratico_3_8000100004.png" /></td><td> 8000 - 10000 </td></tr><tr><td style="text-align: center;"><img src="legend/Cam_2018_CDemocratico_3_10000113605.png" /></td><td> 10000 - 11360 </td></tr></table>': layer_Cam_2018_CDemocratico_3,'GCC_Duque_Loc<br /><table><tr><td style="text-align: center;"><img src="legend/GCC_Duque_Loc_2_027500.png" /></td><td> 0 - 2750 </td></tr><tr><td style="text-align: center;"><img src="legend/GCC_Duque_Loc_2_275055101.png" /></td><td> 2750 - 5510 </td></tr><tr><td style="text-align: center;"><img src="legend/GCC_Duque_Loc_2_551082602.png" /></td><td> 5510 - 8260 </td></tr><tr><td style="text-align: center;"><img src="legend/GCC_Duque_Loc_2_8260110103.png" /></td><td> 8260 - 11010 </td></tr><tr><td style="text-align: center;"><img src="legend/GCC_Duque_Loc_2_11010137704.png" /></td><td> 11010 - 13770 </td></tr></table>': layer_GCC_Duque_Loc_2,'CIS_Petro_Loc<br /><table><tr><td style="text-align: center;"><img src="legend/CIS_Petro_Loc_1_1010000.png" /></td><td> 10 - 1000 </td></tr><tr><td style="text-align: center;"><img src="legend/CIS_Petro_Loc_1_100020001.png" /></td><td> 1000 - 2000 </td></tr><tr><td style="text-align: center;"><img src="legend/CIS_Petro_Loc_1_200030002.png" /></td><td> 2000 - 3000 </td></tr><tr><td style="text-align: center;"><img src="legend/CIS_Petro_Loc_1_300040003.png" /></td><td> 3000 - 4000 </td></tr><tr><td style="text-align: center;"><img src="legend/CIS_Petro_Loc_1_400046004.png" /></td><td> 4000 - 4600 </td></tr></table>': layer_CIS_Petro_Loc_1,'<img src="legend/Localidades_Electoral_2018_0.png" /> Localidades_Electoral_2018': layer_Localidades_Electoral_2018_0,}).addTo(map);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_Sen_2018_Verde_10,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'Nombre'}));
+        </script>
+    </body>
+</html>
